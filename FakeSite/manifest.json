@@ -5,6 +5,12 @@
   "description": "This extension displays daily affirmations",
   "version": "1.0",
 
+  "icons": {
+      "128": "icon-128.png",
+      "16": "icon-16.png",
+      "48": "icon-48.png"
+   },
+
   "permissions": [
     "tabs"
   ],
@@ -14,7 +20,7 @@
   },
 
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "icon-19.png",
     "default_popup": "popup.html"
   }
 }
