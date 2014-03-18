@@ -1,0 +1,15 @@
+body {
+   padding-top: 50px;
+}
+
+ol {
+   font-weight: bolder;
+}
+
+.starter-template {
+   padding: 30px 100px;
+}
+
+dt {
+   text-decoration: underline;
+}
