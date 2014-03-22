@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -51,24 +51,98 @@
             <h2 style="text-decoration: underline">Homework Part 1: HTTP Sniffing</h2>
             <br />
 
-            <h3><b>The Goal</b></h3>
+            <h4><b>The Goal</b></h4>
             <p>
-                Blah Blah Blah
+                For this part of the homework we will be looking at a man-in-the middle attack involving the intecepting
+                and sniffing of HTTP packets that were not originally ment for you. By making use of a sniffing tool combined
+                with what is known as an ARP attack, we can both intercept and read packets that were meant for a different
+                machine on the network. After you are done reading these packets you can forward them to the intended machine
+                leaving the victim none the wiser.
             </p>
 
             <br />
 
-            <h3><b>Getting Started</b></h3>
+            <h4><b>Getting Started</b></h4>
+            <ol>
+                <li>
+                    <p>You will need to download and install <a href="https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0">VMware player</a></p>
+                </li>
+            </ol>
             <p>
-                Blah Blah Blah Blah Blah BlahBlah Blah Blah
+                We will be using VMware player to run a VM that will be used to sniff traffic meant for your main machine. There
+                is a version of it for windows and linux, so it is required that you have one of these types of machines. Having
+                a windows VM will probably not work since in most cases you cannot run a VM inside a VM. The download is about 100 MB.
             </p>
+            <ol start="2">
+                <li>
+                    <p>You will need to download an image of <a href="http://www.offensive-security.com/kali-llnux-vmware-arm-image-download/">Kali Linux</a></p>
+                </li>
+            </ol>
+            <p>
+                Just the basic 32/64-bit version should work fine (not the ARM images). The download is about 2.5 GB.
+                The image is in a .7z file so you will need <a href="http://www.7-zip.org/download.html">7-Zip</a> to extract it.
+                Open the .7z with 7zFM.exe and extract it. The image is about 10.9 GB unzipped because of the reserved harddrive space
+                in the VM so make sure you have space for it.
+            </p>
+            <ol start="3">
+                <li>
+                    <p>Mount the image in VMware player</p>
+                </li>
+            </ol>
+            <p>
+                Open your newly extracted .vmx file with VMware player.
+            </p>
+            <img src="images/mount-image.png" width="80%" />
+            <p />
+            <ol start="4">
+                <li>
+                    <p>Launch the VM and login</p>
+                </li>
+            </ol>
+            <p>
+                When prompted to login select "Other...". Type in "root" when prompted for a username and "toor" when prompted for a password.
+            </p>
+            <ol start="5">
+                <li>
+                    <p>Launch Wireshark</p>
+                </li>
+            </ol>
+            <p>It can be found under Applications -> Kali Linus -> Sniffing/Spoofing -> Network Sniffers -> wireshark.</p>
+            <img src="images/wireshark.png" width="60%" />
+            <p>
+                You may get some errors about certain libraries failing to load or warnings about sniffing while being root
+                but these can be ignored.
+            </p>
+            <p>
+                Select the network "eth0" which is the main ethernet network the VM.
+            </p>
+            <img src="images/start-sniffing.png" width="60%" />
+            <p>
+                To start sniffing click "Start" (No need to do so yet). When you do chances are you will start getting too many packets
+                to count and it will be very difficult to pick the ones you are looking for out. To fixed this go to the menu
+                item "Analyze -> Display Filters..." and select "HTTP" from the list of packet types and click "OK".
+            </p>
+            <img src="images/http-filter.png" width="50%" />
+            <p />
+            <ol start="7">
+                <li>
+                    <p>Navigate to [TODO] to begin receiving HTTP traffic that can be sniffed</p>
+                </li>
+            </ol>
 
             <br />
 
-            <h3><b>The Rest</b></h3>
-            <p>
-                Blah Blah Blah Blah Blah BlahBlah Blah Blah
-            </p>
+            <h3><b>And Now For Your Part...</b></h3>
+            <p>After getting the above environment set up do the following:</p>
+            <ul>
+                <li>Do an ARP Poisoning attack to re-route traffic from your main machine to the VM.</li>
+                <li>Sniff the traffic coming in to the VM and find packets that are coming in from [TODO].</li>
+                <li>Use the information obtained from these packets to [TODO]</li>
+            </ul>
+            <h3><b>Part [TODO] Deliverables</b></h3>
+            <ul>
+                <li>[TODO]</li>
+            </ul>
         </div>
     </div>
     <!-- /.container -->
