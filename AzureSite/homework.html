@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Man-In-The-Middle Attacks</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -46,18 +46,20 @@
             <h3 style="text-decoration: underline">Part 2: Man-In-The-Browser Attack - Google Chrome Extension</h3>
             <br />
 
-            <h4><b>The Goal</b></h4>
+            <h3><b>The Goal</b></h3>
             <p>
                 For this part of the homework, we will be looking at a different type of man-in-the-middle attack. 
                 The previous sections focused on using tools that have already been created for us to insert 
                 ourselves into known attack vectors and perform man-in-the-middle attacks. We will be making a 
-                Google Chrome extension from scratch to grab information about a user's activity. For this exercise,
-                we will focus on obtaining a user's username and password for a website like Facebook.com
+                Google Chrome extension from scratch to perform some malicious activity in a user's browser.
+                We will first walk you through a complete example of replacing information on a webpage without 
+                a user knowing anything has happaened. Then, you will use what you have learned to create a another 
+                Chrome extension that can obtain a user's login credentials for Facebook.com.
             </p>
 
             <br />
 
-            <h4><b>Getting Started</b></h4>
+            <h3><b>Getting Started</b></h3>
             <ol>
                 <li>
                     <p>You will need to first download and install <a href="www.google.com/chrome">Google Chrome</a>.</p>
@@ -83,14 +85,14 @@
             <br />
             <br />
 
-            <h4><b>Creating A Google Chrome Extension</b></h4>
+            <h3><b>Creating A Google Chrome Extension</b></h3>
             <ol start="4">
                 <li>
                     <p>Create a folder on your computer and name it whatever you want.</p>
                 </li>
             </ol>
             <p>
-                I named mine "Daily Affirmations. You'll see why soon."
+                The extension's behavior that the user will see is just that it provides friendly messages, so I named mine "Daily Affirmations".
             </p>
             <ol start="5">
                 <li>
@@ -142,8 +144,7 @@
         "default_icon": "icon-19.png",
         "default_popup": "popup.html"
     }
-}</code>
-                </pre>
+}</code></pre>
             </p>
             <p>
                 This file is what describes everything about our extension to Chrome. Some sections to note:
@@ -153,13 +154,13 @@
                     <dt>description</dt>
                     <dd>The description displayed for our extension</dd>
                     <dt>icons</dt>
-                    <dd>Defines all of the different sizes of icons to be displayed in different part of the browser</dd>
+                    <dd>Defines all of the different sizes of icons to be displayed in different parts of the browser</dd>
                     <dt>permissions</dt>
                     <dd>Defines which capabilities that we need permission to use. For example, we need to access the browser's tabs and have access to any webpage loaded in the browser. We could specify a more specific URL like "http://www.facebook.com" but we will use the more general one for the purposes of this exercise.</dd>
                     <dt>background</dt>
                     <dd>Defines scripts and HTML pages that are run in the background. The defined background.js file is where most of our code will be.</dd>
                     <dt>broswer_action</dt>
-                    <dd>This is where we define the icon that is shown to the right of the address bar as well as the HTML that is shown when we click that button. We will use this HTML to perform some functionality for a user that would make them want to download our extension without realizing some more sinister capabilities are lurking underneath.</dd>
+                    <dd>This is where we define the icon that is shown to the right of the address bar as well as the HTML that is shown when we click that button. We will use this HTML to display the friendly messages mentioned above without the user realizing some more sinister capabilities are lurking underneath.</dd>
                 </dl>
             </p>
             <ol start="8">
@@ -185,8 +186,7 @@
       var randNum = Math.floor( Math.random() * affirmations.length );
       document.getElementById( "textBox" ).innerHTML = affirmations[randNum];
    }
-} );</code>
-                </pre>
+} );</code></pre>
             </p>
             <ol start="9">
                 <li>
@@ -216,8 +216,144 @@
         &lt;p id=&quot;textBox&quot; style=&quot;margin: 5px 0&quot;&gt;&lt;/p&gt;
     &lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code>
-                </pre>
+&lt;/html&gt;</code></pre>
+            </p>
+
+            <br />
+
+            <h3><b>Installing Your Extension</b></h3>
+            <ol start="10">
+                <li>
+                    <p>Open Chrome and navigate to <a href="chrome://extensions/">chrome://extensions/</a> again.</p>
+                </li>
+                <li>
+                    <p>Click "Load unpacked extension..." and select the folder where you have placed all of your files.</p>
+                </li>
+            </ol>
+            <img src="images\load-ext.png" width="80%"></img>
+            <br />
+            <br />
+            <p>
+                You should now see a new button to the right of your address bar. Clicking this gives you a friendly message. 
+                This is just some functionality to pretend that the extension does something besides the malicious attacks.
+            </p>
+            <br />
+            <img src="images\smiley-msg.png" width="50%"></img>
+            <br />
+            <br />
+            <ol start="12">
+                <li>
+                    <p>
+                        When you make any modifications to your extension, you will need to come back to the 
+                        <a href="chrome://extensions/">chrome://extensions/</a> page and click "Reload".
+                    </p>
+                </li>
+            </ol>
+
+            <br />
+
+            <h3><b>Replacing Content In The Web Browser</b></h3>
+            <p>Now we will detect when a page has finished loading in the browser and we will replace the content of that page with some new content.</p>
+            <ol start="13">
+                <li>
+                    <p>
+                        Create a file in your folder named "background.js" and copy the following text into that file.
+                    </p>
+                </li>
+            </ol>
+            <p>
+                <pre class="prettyprint lang-js">
+<code>chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
+   if ( tab.status == "complete" && tab.url.indexOf( "google.com" ) != -1 ) {
+      chrome.tabs.executeScript( tabId, { file: "replaceGoogle.js" } );
+   }
+} );</code></pre>
+            </p>
+            <p>
+                This code creates a listener function that is called whenever a page loads in a browser tab. The function then checks to see if the page is done
+                loading and if the page URL contains "google.com". It then executes javascript code within that web page. You will see what that javascipt does 
+                in the next step.
+            </p>
+            <ol start="14">
+                <li>
+                    <p>
+                        Create a file in your folder named "replaceGoogle.js" and copy the following text into that file.
+                    </p>
+                </li>
+            </ol>
+            <p>
+                <pre class="prettyprint lang-js">
+<code>var div = document.getElementById( &quot;gsr&quot; );
+
+if ( div ) {
+   div.innerHTML = '&lt;div style=&quot;width:100%; text-align:center; padding-top:200px;&quot;&gt;' +
+                        '&lt;img alt=&quot;Google&quot; height=&quot;95&quot; src=&quot;/images/srpr/logo11w.png&quot; align=&quot;middle&quot; width=&quot;269&quot;&gt;' +
+                        '&lt;p&gt;&lt;h3&gt;' +
+                            'We are sorry. Google is officially shutting down. ' +
+                            'Please direct all future searches to &lt;a href=&quot;http://www.bing.com&quot;&gt;Bing&lt;/a&gt;.' +
+                        '&lt;/h3&gt;&lt;/p&gt;' +
+                    '&lt;/div&gt;';
+}</code></pre>
+                <p>This code finds an element with an id of "gsr" and replaces the HTML inside of it with some other HTML.</p>
+            <ol start="15">
+                <li>
+                    <p>
+                        Navigate to <a href="http://www.google.com">google.com</a> and you should see that the content has been replaced with our own.
+                    </p>
+                </li>
+            </ol>
+
+            <br />
+
+            <h3><b>And Now For Your Part...</b></h3>
+            <p>Take what you learned in the walkthrough above and make another extension that fits the following criteria</p>
+            <ul>
+                <li>The default functionality should still work and pop up friendly messages when the smiley face button is clicked.</li>
+                <li>When a user logs in to Facebook, the user's email and password should be displayed in an alert box.</li>
+                <li>After your extensions displays the user's email and password, the Facebook login should still proceed normally.</li>
+                <li>A user should not be able to tell anything else is going on besides logging into Facebook. (Except for the alert box popping up)</li>
+            </ul>
+            <p>The Facebook page that you will be working with should look similar to this:</p>
+            <img src="images\fb-login.png" width="50%"></img>
+            <p>If you don't want to create another extension from scratch, here is a .zip file that contains an extension with steps 1-12 completed above:</p>
+            <ul>
+                <li>
+                    <p><a href="files\DailyAffirmations.zip">Download the .zip file</a></p>
+                </li>
+            </ul>
+            <p>
+                <b>Hints:</b>
+                <ul>
+                    <li>You may want to uninstall the previous extension that we created from the <a href="chrome://extensions/">chrome://extensions/</a> page so that there is less confusion.</li>
+                    <li>You can use <a href="http://www.w3schools.com/jsref/met_doc_getelementbyid.asp">getElementById()</a> to get a reference to an object on a web page by its id.</li>
+                    <li>You can use <a href="http://www.w3schools.com/jsref/met_win_alert.asp">alert()</a> to pop up a dialog with a message inside.</li>
+                    <li>Some HTML elements can contain an <a href="http://www.w3schools.com/jsref/event_onclick.asp">onclick</a> handler that defines what javascript code gets executed when the element is clicked.</li>
+                    <li>If the HTML or javascript you are trying to inject into a web page is not showing up properly, make sure you are escaping certain characters like single quotes and double quotes correctly.</li>
+                    <li>You can find the id of an element that you want to replace with new content by viewing a web page's souce code in the browser. 
+                        In Chrome, you can right-click on a page and click "View page source". You can also look at this source code to figure out which 
+                        content to inject into the web page.
+                    </li>
+                </ul>
+                <p>Here is an example of how the extension should work once completed</p>
+                <!-- copy and paste. Modify height and width if desired. -->
+                <object id="scPlayer" width="1046" height="580" type="application/x-shockwave-flash" data="http://content.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/scplayer.swf">
+                    <param name="movie" value="http://content.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/scplayer.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#FFFFFF" />
+                    <param name="flashVars" value="thumb=http://content.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/FirstFrame.jpg&containerwidth=1046&containerheight=580&xmp=sc.xmp&content=http://content.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/03.22.2014-15.14.MP4&blurover=false" />
+                    <param name="allowFullScreen" value="true" />
+                    <param name="scale" value="showall" />
+                    <param name="allowScriptAccess" value="always" />
+                    <param name="base" value="http://content.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/" />
+                    <iframe type="text/html" frameborder="0" scrolling="no" style="overflow: hidden;" src="http://www.screencast.com/users/Bubbs/folders/Testing/media/75f5cd96-5b9e-41e2-8589-b5ad0b5876c9/embed" height="580" width="1046"></iframe>
+                </object>
+            </p>
+            <h3><b>Part 2 Deliverables</b></h3>
+            <p>
+                <ul>
+                    <li>Place a screenshot of your extension popping up a message box containing the entered email and password into the folder for your extension.</li>
+                    <li>Zip up your entire extension's folder and send it to us.</li>
+                </ul>
             </p>
         </div>
     </div>
