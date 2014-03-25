@@ -133,40 +133,58 @@
             <br />
 
             <h3><b>Traffic Sniffing</b></h3>
-            <p>For this part of the homework, you will monitor different types of network traffic and report what you see.</p>
+            <p>
+                For this part of the homework, you will monitor different types of network traffic and report what you see. 
+                You will use the "wget" command to download some apps that we have created for you to use, so just make sure 
+                that you are downloading them into the directory that you want.
+            </p>
             <ol start="8">
                 <li>
                     <p>Run Wireshark during these sniffing exercises.</p>
                 </li>
             </ol>
+            <p>
+                You can filter what you see in Wireshark by using the filter field near the top of the application. You can 
+                type into it manually or right click on items in the list and add fileters based on them. For example, it will 
+                be useful to filter by IP for this part of the homework.
+            </p>
             <p><u><b>TCP Sniffing</b></u></p>
             <p>TCP sniffing will allow you to see low level individual packets that are being sent across a network.</p>
             <ol start="9">
                 <li>
-                    <p>Run "[TODO]""</p>
+                    <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/tcp_client>"</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                    <p>Run "tcp_client". This will send TCP traffic for you to monitor.</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
                 </li>
             </ol>
             <p><u><b>HTTP Sniffing</b></u></p>
             <p>HTTP sniffing will allow you to see higher level web requests being sent across a network. Under the hood, each of these HTTP requests is made up of multple TCP packets.</p>
-            <ol start="11">
+            <ol start="12">
                 <li>
-                    <p>Run "[TODO]"</p>
+                    <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/http_client>"</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                    <p>Run "http_client". This will send HTTP traffic for you to monitor.</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
                 </li>
             </ol>
             <p><u><b>HTTPS Sniffing</b></u></p>
             <p>HTTPS sniffing will allow you to see higher level web requests similar to HTTP requests. The requests payload in these cases are considered secure and will appear encrypted.</p>
-            <ol start="13">
+            <ol start="15">
                 <li>
-                    <p>Run "[TODO]"</p>
+                    <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/https_client>"</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                    <p>Run "https_client". This will send HTTPS traffic for you to monitor.</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
                 </li>
             </ol>
             <h3><b>Part [TODO] Deliverables</b></h3>
