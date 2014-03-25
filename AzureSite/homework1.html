@@ -54,7 +54,7 @@
             <h4><b>The Goal</b></h4>
             <p>
                 For this part of the homework we will be looking at a man-in-the middle attack involving the intecepting
-                and sniffing of HTTP packets that were not originally ment for you. By making use of a sniffing tool combined
+                and sniffing of HTTP packets that were not originally meant for you. By making use of a sniffing tool combined
                 with what is known as an ARP attack, we can both intercept and read packets that were meant for a different
                 machine on the network. After you are done reading these packets you can forward them to the intended machine
                 leaving the victim none the wiser.
@@ -132,13 +132,43 @@
 
             <br />
 
-            <h3><b>And Now For Your Part...</b></h3>
-            <p>After getting the above environment set up do the following:</p>
-            <ul>
-                <li>Do an ARP Poisoning attack to re-route traffic from your main machine to the VM.</li>
-                <li>Sniff the traffic coming in to the VM and find packets that are coming in from [TODO].</li>
-                <li>Use the information obtained from these packets to [TODO]</li>
-            </ul>
+            <h3><b>Traffic Sniffing</b></h3>
+            <p>For this part of the homework, you will monitor different types of network traffic and report what you see.</p>
+            <ol start="8">
+                <li>
+                    <p>Run Wireshark during these sniffing exercises.</p>
+                </li>
+            </ol>
+            <p><u><b>TCP Sniffing</b></u></p>
+            <p>TCP sniffing will allow you to see low level individual packets that are being sent across a network.</p>
+            <ol start="9">
+                <li>
+                    <p>Run "[TODO]""</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                </li>
+            </ol>
+            <p><u><b>HTTP Sniffing</b></u></p>
+            <p>HTTP sniffing will allow you to see higher level web requests being sent across a network. Under the hood, each of these HTTP requests is made up of multple TCP packets.</p>
+            <ol start="11">
+                <li>
+                    <p>Run "[TODO]"</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                </li>
+            </ol>
+            <p><u><b>HTTPS Sniffing</b></u></p>
+            <p>HTTPS sniffing will allow you to see higher level web requests similar to HTTP requests. The requests payload in these cases are considered secure and will appear encrypted.</p>
+            <ol start="13">
+                <li>
+                    <p>Run "[TODO]"</p>
+                </li>
+                <li>
+                    <p>Observe the traffic in Wireshark and report what you see.</p>
+                </li>
+            </ol>
             <h3><b>Part [TODO] Deliverables</b></h3>
             <ul>
                 <li>[TODO]</li>
