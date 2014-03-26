@@ -96,6 +96,11 @@
             <p />
             <ol start="4">
                 <li>
+                    <p>
+                        [TODO TODO TODO We need to mention setting up the bridged network TODO TODO TODO]
+                    </p>
+                </li>
+                <li>
                     <p>Launch the VM and login</p>
                 </li>
             </ol>
@@ -198,7 +203,7 @@
             </p>
             <ol start="18">
                 <li>
-                    <p>Run "sslscan" on the server.</p>
+                    <p>Run "<a href="http://man.cx/sslscan(1)">sslscan</a>" on the server.</p>
                 </li>
                 <li>
                     <p>What is the lowest version of SSL supported by the server?</p>
@@ -207,7 +212,7 @@
                     <p>What are the server's preferred ciphers?</p>
                 </li>
                 <li>
-                    <p>Use "openssl" to establish a connection with our server using the preferred SSL cipher. Use Wireshark to capture this activity.</p>
+                    <p>Use "<a href="http://man.cx/openssl">openssl</a>" to establish a connection with our server using the preferred SSL cipher. Use Wireshark to capture this activity.</p>
                 </li>
                 <li>
                     <p>
@@ -228,9 +233,53 @@
             <br />
 
             <h3><b>SSL Stripping</b></h3>
+            <p>
+                For this part of the homework, you will be using "sslstrip" to "strip" out anything that makes an HTTPS request secure so that you can 
+                see the payload inside of it. The request can then be forwarded on as an HTTP request.
+            </p>
             <ol start="24">
-                <li></li>
+                <li>On your host computer (The computer that is running VirtualBox or VMWare), take a screenshot of the secure connection information for an 
+                    HTTPS webpage. In Chrome, you can click the lock on the left side of the address bar.
+                </li>
             </ol>
+            <br />
+            <img src="images/secure-facebook.png" width="50%" />
+            <br />
+            <br />
+            <ol start="25">
+                <li>
+                    <p>
+                        Run "<a href="http://manpages.ubuntu.com/manpages/oneiric/man1/sslstrip.1.html">sslstrip</a>" simlar to how it was demoed in class. Forward TCP transactions from port 80 to port 1234.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        On your host computer, navigate to a secure webpage such as the one you navigated to in step 24. Take a screenshot of the website's secure connection information now.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Attempt to login to that website and observe what is output to your sslstrip.log in the Kali virtual machine. Take a screenshot or report the text inside of that log file. 
+                        You may not want to use real credentials when attempting to login.
+                    </p>
+                </li>
+            </ol>
+            <p>
+                You will need to know your host computer's IP address as well as the server address. (This is basically acting as the router's address if you were attacking someone's computer on a 
+                public wifi network). You can find the IP address of your host computer by looking at the IP address shown in Wireshark while your host computer is performign some web activity. 
+                You can find your server (router) address by using the route -n command.
+            </p>
+
+            <p>
+                If you are having trouble getting things to work or seeing strange behavior, try restarting your Kali virtual machine and/or clearing your recent browsing history on your host computer. 
+                ARP spoofing can sometimes get things into a weird state and something needs to be reset.
+            </p>
+
+            <br />
+            
+            <h3><b>TLS Renegotiation</b></h3>
+            <p>Some stuff will go here</p>
+
             <br />
 
             <h3><b>Part [TODO] Deliverables</b></h3>
