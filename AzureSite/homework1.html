@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    ee
     <link href="css/site.css" rel="stylesheet">
 </head>
 
@@ -35,7 +35,9 @@
                     <li><a href="home.html">Home</a></li>
                     <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Homework <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li class="active"><a href="homework1.html">Part 1: HTTP Sniffing</a></li>
+                            <li><a href="vmware.html">VMWare Player Setup</a></li>
+                            <li><a href="vbox.html">VirtualBox Setup</a></li>
+                            <li class="active"><a href="homework1.html">Part 1: Starbucks Hates You</a></li>
                             <li><a href="homework2.html">Part 2: Chrome Extension</a></li>
                             <li><a href="deliverables.html">Devliverables</a></li>
                         </ul>
@@ -48,10 +50,10 @@
 
     <div class="container">
         <div class="starter-template">
-            <h2 style="text-decoration: underline">Homework Part 1: HTTP Sniffing</h2>
+            <h2 style="text-decoration: underline">Homework Part 1: Becoming Dangerous at Starbucks</h2>
             <br />
 
-            <h4><b>The Goal</b></h4>
+            <h3><b>The Goal</b></h3>
             <p>
                 For this part of the homework we will be looking at a man-in-the middle attack involving the intecepting
                 and sniffing of HTTP packets that were not originally meant for you. By making use of a sniffing tool combined
@@ -62,78 +64,10 @@
 
             <br />
 
-            <h4><b>Getting Started</b></h4>
-            <ol>
-                <li>
-                    <p>You will need to download and install <a href="https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0">VMware player</a></p>
-                </li>
-            </ol>
+            <h3><b>Getting Started</b></h3>
             <p>
-                We will be using VMware player to run a VM that will be used to sniff traffic meant for your main machine. There
-                is a version of it for windows and linux, so it is required that you have one of these types of machines. Having
-                a windows VM will probably not work since in most cases you cannot run a VM inside a VM. The download is about 100 MB.
+                You will first need to get your Kali Linux virtual machine setup. We have directions for using <a href="vmware.html">VMWare Player</a> and <a href="vbox.html">VirtualBox</a>.
             </p>
-            <ol start="2">
-                <li>
-                    <p>You will need to download an image of <a href="http://www.offensive-security.com/kali-llnux-vmware-arm-image-download/">Kali Linux</a></p>
-                </li>
-            </ol>
-            <p>
-                Just the basic 32/64-bit version should work fine (not the ARM images). The download is about 2.5 GB.
-                The image is in a .7z file so you will need <a href="http://www.7-zip.org/download.html">7-Zip</a> to extract it.
-                Open the .7z with 7zFM.exe and extract it. The image is about 10.9 GB unzipped because of the reserved harddrive space
-                in the VM so make sure you have space for it.
-            </p>
-            <ol start="3">
-                <li>
-                    <p>Mount the image in VMware player</p>
-                </li>
-            </ol>
-            <p>
-                Open your newly extracted .vmx file with VMware player.
-            </p>
-            <img src="images/mount-image.png" width="80%" />
-            <p />
-            <ol start="4">
-                <li>
-                    <p>
-                        [TODO TODO TODO We need to mention setting up the bridged network TODO TODO TODO]
-                    </p>
-                </li>
-                <li>
-                    <p>Launch the VM and login</p>
-                </li>
-            </ol>
-            <p>
-                When prompted to login select "Other...". Type in "root" when prompted for a username and "toor" when prompted for a password.
-            </p>
-            <ol start="5">
-                <li>
-                    <p>Launch Wireshark</p>
-                </li>
-            </ol>
-            <p>It can be found under Applications -> Kali Linus -> Sniffing/Spoofing -> Network Sniffers -> wireshark.</p>
-            <img src="images/wireshark.png" width="60%" />
-            <p>
-                You may get some errors about certain libraries failing to load or warnings about sniffing while being root
-                but these can be ignored.
-            </p>
-            <p>
-                Select the network "eth0" which is the main ethernet network the VM.
-            </p>
-            <img src="images/start-sniffing.png" width="60%" />
-            <p>
-                To start sniffing click "Start" (No need to do so yet). When you do chances are you will start getting too many packets
-                to count and it will be very difficult to pick the ones you are looking for out. To fixed this go to the menu
-                item "Analyze -> Display Filters..." and select "HTTP" from the list of packet types and click "OK".
-            </p>
-            <img src="images/http-filter.png" width="50%" />
-            <p />
-            <ol start="7">
-                <li>
-                    <p>Navigate to [TODO] to begin receiving HTTP traffic that can be sniffed</p>
-                </li>
-            </ol>
 
             <br />
 
@@ -143,19 +77,36 @@
                 You will use the "wget" command to download some apps that we have created for you to use, so just make sure 
                 that you are downloading them into the directory that you want.
             </p>
-            <ol start="8">
+            <ol>
                 <li>
                     <p>Run Wireshark during these sniffing exercises.</p>
                 </li>
             </ol>
+            <p>It can be found under Applications -> Kali Linux -> Sniffing/Spoofing -> Network Sniffers -> wireshark.</p>
+            <img src="images/wireshark.png" width="60%" />
+            <br /> <br />
+            <p>
+                You may get some errors about certain libraries failing to load or warnings about sniffing while being root
+                but these can be ignored.
+            </p>
+            <ol start="2">
+                <li>
+                    <p>Select the network "eth0" which is the main ethernet network for the VM and click "Start"</p>
+                </li>
+            </ol>
+            <img src="images/start-sniffing.png" width="60%" />
+            <br /> <br />
             <p>
                 You can filter what you see in Wireshark by using the filter field near the top of the application. You can 
-                type into it manually or right click on items in the list and add fileters based on them. For example, it will 
+                type into it manually or right click on items in the list and add filters based on them. For example, it will 
                 be useful to filter by IP for this part of the homework.
             </p>
+
+            <br />
+
             <p><u><b>TCP Sniffing</b></u></p>
             <p>TCP sniffing will allow you to see low level individual packets that are being sent across a network.</p>
-            <ol start="9">
+            <ol start="3">
                 <li>
                     <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/tcp_client.bin"</p>
                 </li>
@@ -166,9 +117,10 @@
                     <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
                 </li>
             </ol>
+            <br />
             <p><u><b>HTTP Sniffing</b></u></p>
             <p>HTTP sniffing will allow you to see higher level web requests being sent across a network. Under the hood, each of these HTTP requests is made up of multple TCP packets.</p>
-            <ol start="12">
+            <ol start="6">
                 <li>
                     <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/http_client.bin"</p>
                 </li>
@@ -179,9 +131,10 @@
                     <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
                 </li>
             </ol>
+            <br />
             <p><u><b>HTTPS Sniffing</b></u></p>
             <p>HTTPS sniffing will allow you to see higher level web requests similar to HTTP requests. The requests payload in these cases are considered secure and will appear encrypted.</p>
-            <ol start="15">
+            <ol start="9">
                 <li>
                     <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/https_client.bin"</p>
                 </li>
@@ -201,7 +154,7 @@
                 that we have created. You will then establish a connection with that server based on the 
                 information that you find. The server's IP address is 138.91.119.153.
             </p>
-            <ol start="18">
+            <ol start="12">
                 <li>
                     <p>Run "<a href="http://man.cx/sslscan(1)">sslscan</a>" on the server.</p>
                 </li>
@@ -237,7 +190,7 @@
                 For this part of the homework, you will be using "sslstrip" to "strip" out anything that makes an HTTPS request secure so that you can 
                 see the payload inside of it. The request can then be forwarded on as an HTTP request.
             </p>
-            <ol start="24">
+            <ol start="18">
                 <li>On your host computer (The computer that is running VirtualBox or VMWare), take a screenshot of the secure connection information for an 
                     HTTPS webpage. In Chrome, you can click the lock on the left side of the address bar.
                 </li>
@@ -246,7 +199,7 @@
             <img src="images/secure-facebook.png" width="50%" />
             <br />
             <br />
-            <ol start="25">
+            <ol start="19">
                 <li>
                     <p>
                         Run "<a href="http://manpages.ubuntu.com/manpages/oneiric/man1/sslstrip.1.html">sslstrip</a>" simlar to how it was demoed in class. Forward TCP transactions from port 80 to port 1234.
@@ -276,7 +229,7 @@
             </p>
 
             <br />
-            
+
             <h3><b>TLS Renegotiation</b></h3>
             <p>Some stuff will go here</p>
 
