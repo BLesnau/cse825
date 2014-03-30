@@ -183,7 +183,13 @@
             <br />
 
             <h3><b>SSL DOS</b></h3>
-            <p>Some stuff will go here</p>
+            <p>
+                A DOS (Denial Of Service) attack is is when an attacker interacts with a server to make it perform some operation repeatedly 
+                with the hope of consuming most or all of the server's resources. These SSL DOS attacks are used in conjuction with many 
+                MITM attacks because some servers revert to less secure behavior when their resources are overloaded, whether it's by design 
+                or unintentional. An unlikely (hopefully) example would be a server reverting to HTTP traffic instead of HTTPS when the 
+                server's CPU usage goes above 90%.
+            </p>
 
             <p>
                 For this part of the homework, you will be performing SSL DOS attacks on two different servers. The insecure server allows insecure 
@@ -296,9 +302,9 @@
                 </li>
             </ol>
             <p>
-                You will need to know your host computer's IP address (according to your Kali VM) as well as the server address. (This is basically acting as the router's address if you were attacking someone's computer on a 
+                You will need to know your host (victim) computer's IP address (according to your Kali VM) as well as the gateway's IP address. (This is basically acting as the router's address if you were attacking someone's computer on a 
                 public wifi network). You can find the IP address of your host computer by looking at the IP address shown in Wireshark while your host computer is performing some web activity. 
-                You can find your server (router) address by using the route -n command.
+                You can find your gateway (router) address by using the route -n command.
             </p>
 
             <p>
@@ -309,7 +315,84 @@
             <br />
 
             <h3><b>TLS Renegotiation</b></h3>
-            <p>Some stuff will go here</p>
+            <p>
+                TLS renegotiation allows a client and server who have already established a TLS connection to negotiate or exchange new 
+                parameters or keys. This can be exploited with a MITM attack. If you can put yourself into the middle of the communication 
+                between the client and server, you can use the existing connection to inject your own content. This can often be done 
+                without the client knowing it has happened.
+            </p>
+            <p>
+                For this part of the homework, you will be taking advantage of TLS renegotiation by injecting your own content in the middle 
+                of a connection between a client (Your host computer) and a server.
+            </p>
+            <p>The server's IP address that you will be using is 191.238.51.50.</p>
+
+            <ol start="32">
+                <li>
+                    <p>Run the following sequence of commands.</p>
+                </li>
+            </ol>
+            <br />
+            <pre class="prettyprint">
+<code>wget http://mitm.azurewebsites.net/AzureSite/files/tls_demo.tar.gz
+tar -xzvf tls_demo.tar.gz
+cd tls/
+cp tls-renegotiation-poc.py /usr/bin/
+tar -xzvf tlslite-0.3.8.tar.gz
+cd tlslite-0.3.8/
+python setup.py install
+</code></pre>
+            <br />
+            <ol start="33">
+                <li>
+                    <p>Setup IP forwarding, IP table redirecting, and ARP spoofing similar to how it was demoed during the presentation</p>
+                </li>
+            </ol>
+            <p>You will need the IP address of your host (victim) computer as well your gateway's IP address once again.</p>
+            <ol start="33">
+                <li>
+                    <p>
+                        On your Kali VM, navigate to the server's webpage (<a href="https://191.238.51.50/mitm">https://191.238.51.50/mitm</a>) 
+                        and submit a log message.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Observe in Wireshark or your browser how the log message is sent to be stored. Hint: Look at the querystring parameters and request type (GET, POST, etc.)
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Navigate to <a href="https://191.238.51.50/log.txt">https://191.238.51.50/log.txt</a> and observe how your message looks. 
+                        You should see the OS that you used (Linux) and the message that you entered.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Do the same thing from your host computer ad you should see a different OS as long as your host computer is not Linux.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Use "tls-renegotiation-poc.py" to perform a TLS renegotiation attack on the server's webpage from the Kali VM that results 
+                        in a message being logged on behalf of the host computer.
+                    </p>
+                </li>
+            </ol>
+            <p>Even though the message is being injected from the Kali VM, the log should show that the message came from the host computer's OS.</p>
+            <p>
+                The command that you run should be similar to "tls-renegotiation-poc.py -l 8080 -b ATTACKER_IP -t SERVER_IP:443 --inject
+                {your_content}" where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
+                request strings that you passed to the openssl command previously. For example, a simple GET request could be "GET /". 
+            </p>
+            <ol start="38">
+                <li>
+                    <p>Take a screenshot of Wireshark witnessing the TLS renegotiation attack.</p>
+                </li>
+                <li>
+                    <p>What what the command that you used to perform the attack?</p>
+                </li>
+            </ol>
 
             <br />
 
