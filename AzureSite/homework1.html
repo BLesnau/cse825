@@ -84,7 +84,8 @@
             </ol>
             <p>It can be found under Applications -> Kali Linux -> Sniffing/Spoofing -> Network Sniffers -> wireshark.</p>
             <img src="images/wireshark.png" width="60%" />
-            <br /> <br />
+            <br />
+            <br />
             <p>
                 You may get some errors about certain libraries failing to load or warnings about sniffing while being root
                 but these can be ignored.
@@ -95,7 +96,8 @@
                 </li>
             </ol>
             <img src="images/start-sniffing.png" width="60%" />
-            <br /> <br />
+            <br />
+            <br />
             <p>
                 You can filter what you see in Wireshark by using the filter field near the top of the application. You can 
                 type into it manually or right click on items in the list and add filters based on them. For example, it will 
@@ -114,7 +116,7 @@
                     <p>Run "tcp_client". This will send TCP traffic for you to monitor.</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
+                    <p>Observe the traffic in Wireshark and report the application data that you see being sent and received</p>
                 </li>
             </ol>
             <br />
@@ -128,7 +130,7 @@
                     <p>Run "http_client". This will send HTTP traffic for you to monitor.</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
+                    <p>Observe the traffic in Wireshark and report the application data that you see being sent and received</p>
                 </li>
             </ol>
             <br />
@@ -142,7 +144,7 @@
                     <p>Run "https_client". This will send HTTPS traffic for you to monitor.</p>
                 </li>
                 <li>
-                    <p>Observe the traffic in Wireshark and report what you see by taking a screenshot.</p>
+                    <p>Observe the traffic in Wireshark and report the application data that you see being sent and received</p>
                 </li>
             </ol>
 
@@ -183,6 +185,82 @@
             <h3><b>SSL DOS</b></h3>
             <p>Some stuff will go here</p>
 
+            <p>
+                For this part of the homework, you will be performing SSL DOS attacks on two different servers. The insecure server allows insecure 
+                renegotiation and the secure server does not allow it. Their IP addresses are as follows:
+            </p>
+            <ul>
+                <li>Insecure Server: 137.117.84.81</li>
+                <li>Secure Server: 138.91.119.153</li>
+            </ul>
+            <br />
+            <p><u><b>Insecure Renegotion Allowed</b></u></p>
+            <ol start="18">
+                <li>
+                    <p>What version of OpenSSL is running on the insecure server?</p>
+                </li>
+            </ol>
+            <p>
+                Hint: Use "openssl" similar to how you did above in the OpenSSL section, but perform a GET request on the webpage. Make sure that you find the OpenSSL 
+                version, not the SSL version.
+            </p>
+            <ol start="19">
+                <li>
+                    <p>Navigate to the insecure server's HTTPS webpage (https://137.117.84.81) and observe what it looks like and how it loads.</p>
+                </li>
+                <li>
+                    <p>Use "<a href="https://www.thc.org/thc-ssl-dos/">thc-ssl-dos</a>" to perform an SSL DOS attack on the insecure server. This is already installed in the Kali VM.</p>
+                </li>
+                <li>
+                    <p>What is the max number of connections that you see?</p>
+                </li>
+                <li>
+                    <p>Navigate back to the insecure server's webpage and observe how it behaves now. Take a screenshot of what it looks like. Be patient. It may take longer this time to load.</p>
+                </li>
+                <li>
+                    <p>What was the command that you used to perform this attack?</p>
+                </li>
+            </ol>
+            <p>Make sure that you close the "thc-ssl-dos" application so that others can continue to perform the attack.</p>
+            <br />
+            <p><u><b>Insecure Renegotion Disabled</b></u></p>
+            <ol start="24">
+                <li>
+                    <p>Perform an SSL DOS attack on the secure server</p>
+                </li>
+            </ol>
+            <p>
+                Hint: Remember that insecure renegotiation is not allowed on the secure server. The previous attack will not work since renegotions 
+                will not occur repeatedly for the same connection. You will need to write a script that opens many secure connections with the server.
+                Use the command that you used for the insecure server as a starting point and open the connections in parallel.
+            </p>
+            <p>
+                Bash script <a href="http://www.cyberciti.biz/faq/bash-for-loop/">loops</a> and <a href="http://www.symkat.com/understanding-job-control-in-bash">background jobs</a> may help you out.
+            </p>
+            <p>You can view the current total percent of current CPU usage here to see if your attack is working: <a href="http://138.91.119.153/cpu.txt">http://138.91.119.153/cpu.txt</a></p>
+            <ol start="25">
+                <li>
+                    <p>Turn in the script that you used to perform the attack on the secure server.</p>
+                </li>
+            </ol>
+            <p>Once again, make sure that you close the "thc-ssl-dos" application so that others can continue to perform the attack.</p>
+            <br />
+            <p><u><b>Are Secure Sites That You Use Suseptible to SSL DOS Attacks?</b></u></p>
+            <ol start="26">
+                <li>
+                    <p>Check three secure (HTTPS) sites that you use to see if insecure renogitation is allowed.</p>
+                </li>
+            </ol>
+            <p>
+                After connection with "openssl", type "R" and hit Enter. If insecure renegotiation is enabled, you will see a new certificate being issued. 
+                If insecure renegotiation is disabled, you will see an error.
+            </p>
+            <ol start="27">
+                <li>
+                    <p>Report which websites you tested and whether insecure renegotiation was enabled or disabled.</p>
+                </li>
+            </ol>
+
             <br />
 
             <h3><b>SSL Stripping</b></h3>
@@ -190,7 +268,7 @@
                 For this part of the homework, you will be using "sslstrip" to "strip" out anything that makes an HTTPS request secure so that you can 
                 see the payload inside of it. The request can then be forwarded on as an HTTP request.
             </p>
-            <ol start="18">
+            <ol start="28">
                 <li>On your host computer (The computer that is running VirtualBox or VMWare), take a screenshot of the secure connection information for an 
                     HTTPS webpage. In Chrome, you can click the lock on the left side of the address bar.
                 </li>
@@ -199,7 +277,7 @@
             <img src="images/secure-facebook.png" width="50%" />
             <br />
             <br />
-            <ol start="19">
+            <ol start="29">
                 <li>
                     <p>
                         Run "<a href="http://manpages.ubuntu.com/manpages/oneiric/man1/sslstrip.1.html">sslstrip</a>" simlar to how it was demoed in class. Forward TCP transactions from port 80 to port 1234.
@@ -218,8 +296,8 @@
                 </li>
             </ol>
             <p>
-                You will need to know your host computer's IP address as well as the server address. (This is basically acting as the router's address if you were attacking someone's computer on a 
-                public wifi network). You can find the IP address of your host computer by looking at the IP address shown in Wireshark while your host computer is performign some web activity. 
+                You will need to know your host computer's IP address (according to your Kali VM) as well as the server address. (This is basically acting as the router's address if you were attacking someone's computer on a 
+                public wifi network). You can find the IP address of your host computer by looking at the IP address shown in Wireshark while your host computer is performing some web activity. 
                 You can find your server (router) address by using the route -n command.
             </p>
 
