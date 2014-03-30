@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    ee
+
     <link href="css/site.css" rel="stylesheet">
 </head>
 
@@ -369,7 +369,7 @@ python setup.py install
                 </li>
                 <li>
                     <p>
-                        Do the same thing from your host computer ad you should see a different OS as long as your host computer is not Linux.
+                        Do the same thing from your host computer and you should see a different OS as long as your host computer is not Linux.
                     </p>
                 </li>
                 <li>
@@ -381,8 +381,10 @@ python setup.py install
             </ol>
             <p>Even though the message is being injected from the Kali VM, the log should show that the message came from the host computer's OS.</p>
             <p>
-                The command that you run should be similar to "tls-renegotiation-poc.py -l 8080 -b ATTACKER_IP -t SERVER_IP:443 --inject
-                {your_content}" where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
+                The command that you run should be similar to... 
+            </p>
+            <pre class="prettyprint"><code>tls-renegotiation-poc.py -l 8080 -b ATTACKER_IP -t SERVER_IP:443 --inject {YOUR_CONTENT}</code></pre>
+            <p>...where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
                 request strings that you passed to the openssl command previously. For example, a simple GET request could be "GET /". 
             </p>
             <ol start="38">
@@ -396,9 +398,10 @@ python setup.py install
 
             <br />
 
-            <h3><b>Part [TODO] Deliverables</b></h3>
+            <h3><b>Part 1 Deliverables</b></h3>
             <ul>
-                <li>[TODO]</li>
+                <li>Turn in a document with all of the requested answers above including screenshots.</li>
+                <li>Look <a href="deliverables.html">here</a> for information about everything you need to turn in and how you should submit it.</li>
             </ul>
         </div>
     </div>
