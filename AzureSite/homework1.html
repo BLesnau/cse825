@@ -61,6 +61,7 @@
                 machine on the network. After you are done reading these packets you can forward them to the intended machine
                 leaving the victim none the wiser.
             </p>
+            <p>You can use <a href="files/Part1.docx">this document</a> to fill in your answers so that you know exactly which information you need to submit.</p>
 
             <br />
 
@@ -151,12 +152,30 @@
             <br />
 
             <h3><b>OpenSSL</b></h3>
+            <p><u><b>Decrypting Messages</b></u></p>
+            <p>
+                We will first look at a simple example of how you can use OpenSSL to decrypt a message. It's very similar to how 
+                it happens during a secure SSL tranmission between a browser and a website.
+            </p>
+            <ol start="12">
+                <li>
+                    <p>Run "wget http://mitm.azurewebsites.net/AzureSite/files/openssl_decrypt_homework.tar.gz".</p>
+                </li>
+                <li>
+                    <p>Run "tar -xzvf openssl_decrypt_homework.tar.gz".</p>
+                </li>
+                <li>
+                    <p>Use "<a href="http://man.cx/openssl">openssl</a>" and the key that you just downloaded to decrypt the message that came with it.</p>
+                </li>
+            </ol>
+            <br />
+            <p><u><b>OpenSSL Configuration</b></u></p>
             <p>
                 For this part of the homework, you will be looking at how OpenSSL is setup on a Linux server 
                 that we have created. You will then establish a connection with that server based on the 
                 information that you find. The server's IP address is 138.91.119.153.
             </p>
-            <ol start="12">
+            <ol start="15">
                 <li>
                     <p>Run "<a href="http://man.cx/sslscan(1)">sslscan</a>" on the server.</p>
                 </li>
@@ -167,11 +186,11 @@
                     <p>What are the server's preferred ciphers?</p>
                 </li>
                 <li>
-                    <p>Use "<a href="http://man.cx/openssl">openssl</a>" to establish a connection with our server using the preferred SSL cipher. Use Wireshark to capture this activity.</p>
+                    <p>Use "openssl" to establish a connection with our server using the preferred SSL cipher. Use Wireshark to capture this activity.</p>
                 </li>
                 <li>
                     <p>
-                        Turn in a screenshot of the "Client Hello" request with the "Cipher Suites" section expanded under the "Scure Sockets Layer". 
+                        Turn in a screenshot of the "Client Hello" request with the "Cipher Suites" section expanded under the "Secure Sockets Layer". 
                         You can get to this information by double-clicking the message that you want to look at.
                     </p>
                 </li>
@@ -201,7 +220,7 @@
             </ul>
             <br />
             <p><u><b>Insecure Renegotion Allowed</b></u></p>
-            <ol start="18">
+            <ol start="21">
                 <li>
                     <p>What version of OpenSSL is running on the insecure server?</p>
                 </li>
@@ -210,7 +229,7 @@
                 Hint: Use "openssl" similar to how you did above in the OpenSSL section, but perform a GET request on the webpage. Make sure that you find the OpenSSL 
                 version, not the SSL version.
             </p>
-            <ol start="19">
+            <ol start="22">
                 <li>
                     <p>Navigate to the insecure server's HTTPS webpage (https://137.117.84.81) and observe what it looks like and how it loads.</p>
                 </li>
@@ -230,7 +249,7 @@
             <p>Make sure that you close the "thc-ssl-dos" application so that others can continue to perform the attack.</p>
             <br />
             <p><u><b>Insecure Renegotion Disabled</b></u></p>
-            <ol start="24">
+            <ol start="27">
                 <li>
                     <p>Perform an SSL DOS attack on the secure server</p>
                 </li>
@@ -244,7 +263,7 @@
                 Bash script <a href="http://www.cyberciti.biz/faq/bash-for-loop/">loops</a> and <a href="http://www.symkat.com/understanding-job-control-in-bash">background jobs</a> may help you out.
             </p>
             <p>You can view the current total percent of current CPU usage here to see if your attack is working: <a href="http://138.91.119.153/cpu.txt">http://138.91.119.153/cpu.txt</a></p>
-            <ol start="25">
+            <ol start="28">
                 <li>
                     <p>Turn in the script that you used to perform the attack on the secure server.</p>
                 </li>
@@ -252,7 +271,7 @@
             <p>Once again, make sure that you close the "thc-ssl-dos" application so that others can continue to perform the attack.</p>
             <br />
             <p><u><b>Are Secure Sites That You Use Suseptible to SSL DOS Attacks?</b></u></p>
-            <ol start="26">
+            <ol start="29">
                 <li>
                     <p>Check three secure (HTTPS) sites that you use to see if insecure renogitation is allowed.</p>
                 </li>
@@ -261,7 +280,7 @@
                 After connection with "openssl", type "R" and hit Enter. If insecure renegotiation is enabled, you will see a new certificate being issued. 
                 If insecure renegotiation is disabled, you will see an error.
             </p>
-            <ol start="27">
+            <ol start="30">
                 <li>
                     <p>Report which websites you tested and whether insecure renegotiation was enabled or disabled.</p>
                 </li>
@@ -274,7 +293,7 @@
                 For this part of the homework, you will be using "sslstrip" to "strip" out anything that makes an HTTPS request secure so that you can 
                 see the payload inside of it. The request can then be forwarded on as an HTTP request.
             </p>
-            <ol start="28">
+            <ol start="31">
                 <li>On your host computer (The computer that is running VirtualBox or VMWare), take a screenshot of the secure connection information for an 
                     HTTPS webpage. In Chrome, you can click the lock on the left side of the address bar.
                 </li>
@@ -283,7 +302,7 @@
             <img src="images/secure-facebook.png" width="50%" />
             <br />
             <br />
-            <ol start="29">
+            <ol start="32">
                 <li>
                     <p>
                         Run "<a href="http://manpages.ubuntu.com/manpages/oneiric/man1/sslstrip.1.html">sslstrip</a>" simlar to how it was demoed in class. Forward TCP transactions from port 80 to port 1234.
@@ -327,7 +346,7 @@
             </p>
             <p>The server's IP address that you will be using is 191.238.51.50.</p>
 
-            <ol start="32">
+            <ol start="35">
                 <li>
                     <p>Run the following sequence of commands.</p>
                 </li>
@@ -343,13 +362,13 @@ cd tlslite-0.3.8/
 python setup.py install
 </code></pre>
             <br />
-            <ol start="33">
+            <ol start="36">
                 <li>
                     <p>Setup IP forwarding, IP table redirecting, and ARP spoofing similar to how it was demoed during the presentation</p>
                 </li>
             </ol>
             <p>You will need the IP address of your host (victim) computer as well your gateway's IP address once again.</p>
-            <ol start="33">
+            <ol start="37">
                 <li>
                     <p>
                         On your Kali VM, navigate to the server's webpage (<a href="https://191.238.51.50/mitm">https://191.238.51.50/mitm</a>) 
@@ -384,10 +403,11 @@ python setup.py install
                 The command that you run should be similar to... 
             </p>
             <pre class="prettyprint"><code>tls-renegotiation-poc.py -l 8080 -b ATTACKER_IP -t SERVER_IP:443 --inject {YOUR_CONTENT}</code></pre>
-            <p>...where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
+            <p>
+                ...where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
                 request strings that you passed to the openssl command previously. For example, a simple GET request could be "GET /". 
             </p>
-            <ol start="38">
+            <ol start="42">
                 <li>
                     <p>Take a screenshot of Wireshark witnessing the TLS renegotiation attack.</p>
                 </li>
