@@ -66,7 +66,7 @@
                 3-4 hours on it, please ask us for help. We don't want anyone to be stuck for too long.
             </p>
             <p>You can use <a href="files/Part1.docx">this document</a> to fill in your answers so that you know exactly which information you need to submit.</p>
-             
+
             <br />
 
             <h3><b>Getting Started</b></h3>
@@ -284,9 +284,10 @@
                 Bash script <a href="http://www.cyberciti.biz/faq/bash-for-loop/">loops</a> and <a href="http://www.symkat.com/understanding-job-control-in-bash">background jobs</a> may help you out.
             </p>
             <p>You can view the current total percent of current CPU usage here to see if your attack is working: <a href="http://138.91.119.153/cpu.txt">http://138.91.119.153/cpu.txt</a></p>
-            <br/>
+            <br />
             <img src="images/cpu.png" width="70%" />
-            <br/><br/>
+            <br />
+            <br />
             <ol start="28">
                 <li>
                     <p>Turn in the script that you used to perform the attack on the secure server.</p>
@@ -388,12 +389,6 @@ python setup.py install
             <br />
             <ol start="36">
                 <li>
-                    <p>Setup IP forwarding, IP table redirecting, and ARP spoofing similar to how it was demoed during the presentation</p>
-                </li>
-            </ol>
-            <p>You will need the IP address of your host (victim) computer as well your gateway's IP address once again.</p>
-            <ol start="37">
-                <li>
                     <p>
                         On your Kali VM, navigate to the server's webpage (<a href="https://191.238.51.50/mitm">https://191.238.51.50/mitm</a>) 
                         and submit a log message.
@@ -416,11 +411,20 @@ python setup.py install
                     </p>
                 </li>
                 <li>
+                    <p>Setup IP forwarding, IP table redirecting, and ARP spoofing similar to how it was demoed during the presentation</p>
+                </li>
+            </ol>
+            <p>You will need the IP address of your host (victim) computer as well your gateway's IP address once again.</p>
+            <ol start="41">
+                <li>
                     <p>
                         Use "tls-renegotiation-poc.py" to perform a TLS renegotiation attack on the server's webpage from the Kali VM that results 
-                        in a message being logged on behalf of the host computer.
+                        in a message being logged on behalf of the host computer. Navigate to <a href="https://191.238.51.50/mitm">https://191.238.51.50/mitm</a> 
+                        on your host computer.
                     </p>
                 </li>
+            </ol>
+            <ol start="42">
                 <li>
                     <p>
                         Report the new log text from the TLS renegotiation attack.
@@ -435,8 +439,10 @@ python setup.py install
             <p>
                 ...where {YOUR_CONTENT} is the web request that you are injecting. This should be the same format as the web 
                 request strings that you pasted to the openssl command previously. For example, a simple GET request could be "GET /". 
+                Hint: You can look in Wireshark for help with retrieving this string.
             </p>
-            <ol start="42">
+            <p>You may need to close the two "arpspoof" apps and the "tls-renegotiation-poc.py" app before you can use the internet normally on your host computer again.</p>
+            <ol start="43">
                 <li>
                     <p>Take a screenshot of Wireshark witnessing the TLS renegotiation attack.</p>
                 </li>
@@ -448,7 +454,7 @@ python setup.py install
             <br />
 
             <h3><b>Part 1 Deliverables</b></h3>
-            <ul>r
+            <ul>
                 <li>Turn in a document with all of the requested answers above including screenshots.</li>
                 <li>You can use <a href="files/Part1.docx">this document</a> to fill in your answers so that you know exactly which information you need to submit.</li>
                 <li>Look <a href="deliverables.html">here</a> for information about everything you need to turn in and how you should submit it.</li>
