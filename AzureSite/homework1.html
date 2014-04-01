@@ -284,6 +284,7 @@
                 Bash script <a href="http://www.cyberciti.biz/faq/bash-for-loop/">loops</a> and <a href="http://www.symkat.com/understanding-job-control-in-bash">background jobs</a> may help you out.
             </p>
             <p>You can view the current total percent of current CPU usage here to see if your attack is working: <a href="http://138.91.119.153/cpu.txt">http://138.91.119.153/cpu.txt</a></p>
+            <p>Keep in mind that the page will not even load if your attack is working well enough.</p>
             <br />
             <img src="images/cpu.png" width="70%" />
             <br />
@@ -294,6 +295,7 @@
                 </li>
             </ol>
             <p>Once again, make sure that you close your script if it is still running so that others can continue to perform the attack.</p>
+            <p>If your script left some processes running (check with "ps"), you can close all of them with a pattern to match the name (pskill -f "openssl")</p>
             <br />
             <p><u><b>Are Secure Sites That You Use Susceptible to SSL DOS Attacks?</b></u></p>
             <ol start="29">
