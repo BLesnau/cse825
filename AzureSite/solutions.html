@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+    <title>Man-In-The-Middle Attacks</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/site.css" rel="stylesheet">
+
+    <style>
+        ol {
+           font-weight: normal;
+        }
+        .ans {
+            text-indent: 2em; 
+            display: block;
+            font-weight: bolder;
+            font-size: 110%;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="font-weight: bolder; color: #00AA8C" href="home.html">Man-In-The-Middle Attacks</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="home.html">Home</a></li>
+                    <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Homework <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="vmware.html">VMWare Player Setup</a></li>
+                            <li><a href="vbox.html">VirtualBox Setup</a></li>
+                            <li><a href="homework1.html">Part 1: Starbucks Hates You</a></li>
+                            <li><a href="homework2.html">Part 2: Chrome Extension</a></li>
+                            <li><a href="deliverables.html">Deliverables</a></li>
+                            <li class="active"><a href="solutions.html">Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="starter-template">
+            <p style="border-color: red;color: red;border-width: 2px;border-style: solid;padding-left: 5px;padding-right: 5px">
+                Please do not do any of the homework attacks that use ARP spoofing on the school network. We think that MSU is 
+                watching the ARP cache and not allowing all of the attacks to work. If you don't have access to another network, 
+                just turn in the command line arguments that you think you should have run.
+            </p>
+
+            <h2 style="text-decoration: underline">Homework Part 1 Solutions: Becoming Dangerous at Starbucks</h2>
+            <br />
+
+            <h3><b>Traffic Sniffing</b></h3>
+            <br/>
+
+            <p><u><b>TCP Sniffing</b></u></p>
+            <ol start="5">
+                <li>
+                    <p>Observe the traffic in Wireshark and report the following:</p>
+                    <ul>
+                        <li>Application data sent<span class="ans">I LOVE TACOS</span></li>
+                        <li>Application data received<span class="ans">I LOVE TACOS TOO!!!</span></li>
+                        <li>IP address of the server that "tcp_client" communicated with<span class="ans">138.91.119.153</span></li>
+                        <li>Port that the communication occurs on<span class="ans">81</span></li>
+                    </ul>
+                </li>
+            </ol>
+            <br/>
+            
+            <p><u><b>HTTP Sniffing</b></u></p>
+            <ol start="8">
+                <li>
+                    <p>Observe the traffic in Wireshark and report the following:</p>
+                    <ul>
+                        <li>IP address of the server that "http_client" communicated with<span class="ans">138.91.119.153</span></li>
+                        <li>GET request being made<span class="ans">GET /secretmessage.html HTTP/1.0</span></li>
+                        <li>Application data received<pre class="ans" style="text-indent:0em"><code>&lt;html&gt;
+&lt;body&gt;
+&lt;p&gt;I Love Taco&#39;s!!!!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li>
+                    </ul>
+                </li>
+            </ol>
+            <br/>
+
+            <p><u><b>HTTPS Sniffing</b></u></p>
+            <ol start="11">
+                <li>
+                    <p>Observe the traffic in Wireshark and report the following:</p>
+                    <ul>
+                        <li>The protocol that is being used<span class="ans">TLSv1.2 or TLS_DHE_RSA_WITH_AES_256_GCM_SHA384</span></li>
+                        <li>Take a screenshot showing the "Client/Server Hello" message<br/><br/>
+                            <img class="ans" src="images/https-hello.png" />
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <br/>
+
+            <h3><b>OpenSSL</b></h3>
+            <br/>
+
+            <p><u><b>Decrypting Messages</b></u></p>
+            <ol start="11">
+                <li>
+                    <p>What is the decrypted string?<span class="ans">I Love Enchiladas!!!!</span></p>
+                </li>
+            </ol>
+            <br/>
+
+            <p><u><b>OpenSSL Configuration</b></u></p>
+            <ol start="16">
+                <li>
+                    <p>How many ciphers are accepted?<span class="ans">40</span></p>
+                </li>
+                <li>
+                    <p>What are the server's preferred ciphers?<span class="ans">SSLv3  256 bits  DHE-RSA-AES256-SHA</span><span class="ans">TLSv1  256 bits  DHE-RSA-AES256-SHA</span></p>
+                </li>
+            </ol>
+            <ol start="19">
+                <li>
+                    <p>Turn in a screenshot of the "Client Hello" request with the "Cipher Suites" section expanded under the "Secure Sockets Layer".<br/><br/>
+                            <img class="ans" src="images/cipher.png" /></p>
+                </li>
+                <li>
+                    <p>What was the "openssl" command that you used?<span class="ans">openssl s_client -connect 138.91.119.153:443 -cipher EXP-RC4-MD5</span></p>
+                </li>
+            </ol>
+            <br/>
+
+            <h3><b>SSL DOS</b></h3>
+            <p><u><b>Insecure Renegotiation Allowed</b></u></p>
+            <ol start="21">
+                <li>
+                    <p>What version of OpenSSL is running on the insecure server?<span class="ans">TLSv1/SSLv3</span></p>
+                </li>
+            </ol>
+            <ol start="24">
+                <li>
+                    <p>What is the max number of connections that you see?<span class="ans">400</span></p>
+                </li>
+                <li>
+                    <p>After “thc-ssl-dos” reaches the max number of connections, reload the insecure server's webpage. How long does it take to load? Does it load like it did previously?<span class="ans">It should not load, but answers could vary (It could just take a long time to load)</span></p>
+                </li>
+                <li>
+                    <p>What command did you use to perform the attack?<span class="ans">Thc-ssl-dos 137.117.84.81 443 --accept</span></p>
+                </li>
+            </ol>
+            <br/>
+            <p><u><b>Insecure Renegotiation Disabled</b></u></p>
+            <ol start="28">
+                <li>
+                    <p>What script did you use to perform the attack?<pre class="ans" style="text-indent:0em"><code>for i in {1..4000}
+do 
+    openssl s_client -connect 138.91.119.153:443 > /dev/null & 
+done</code></pre></p>
+                </li>
+            </ol>
+            <br/>
+            <p><u><b>Are Secure Sites That You Use Susceptible to SSL DOS Attacks</b></u></p>
+            <ol start="30">
+                <li>
+                    <p>Report which three websites you tested and whether insecure renegotiation was enabled or disabled for them.<span class="ans">The answers for this will vary</span></p>
+                </li>
+            </ol>
+            <br/>
+
+            <h3><b>SSL Stripping</h3>
+            <ol start="31">
+                <li>
+                    <p>Take a screenshot of the secure connection.<span class="ans">The answers for this will vary but the screenshot will show a lock icon with the certificate information for a website</span></p>
+                </li>
+            </ol>
+            <ol start="33">
+                <li>
+                    <p>Take a screenshot of the same connection after using “sslstrip”.<span class="ans">The answers for this will vary but the screenshot will show that a previously secure connection is now insecure and does not have the same certificate information for the website</span></p>
+                </li>
+                <li>
+                    <p>Report the text inside of your sslstrip log file.<span class="ans">The answers for this will vary but the text will contain a username and password</span></p>
+                </li>
+            </ol>
+            <br/>
+
+            <h3><b>TLS Renegotiation</h3><span class="ans">Your answers may contain a different message and host OS</span>
+            <ol start="39">
+                <li>
+                    <p>What is the new line of log text after posting from the Kali VM?<span class="ans">Linux ~ LT VM Test</span></p>
+                </li>
+                <li>
+                    <p>What is the new line of log text after posting from your host computer?<span class="ans">Windows ~ LT Windows Test</span></p>
+                </li>
+            </ol>
+            <ol start="42">
+                <li>
+                    <p>What is the new line of log text after performing the TLS renegotiation attack?<span class="ans">Windows ~ KaliVM_TLS_LT</span></p>
+                </li>
+                <li>
+                    <p>Take a screenshot of Wireshark witnessing the TLS renegotiation attack.<br/><br/>
+                            <img class="ans" src="images/tls-reneg.png" /></p>
+                </li>
+                <li>
+                    <p>What was the command that you used to perform the attack?<span class="ans">tls-renegotiation-poc.py -l 8080 -b 192.168.1.149 -t 191.238.51.50:443 --inject 'GET /mitm/?m=KaliVM_TLS_LT HTTP/1.1'</span></p>
+                </li>
+            </ol>
+            <br/>
+
+        </div>
+    </div>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
